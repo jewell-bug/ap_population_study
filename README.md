@@ -1,1 +1,1 @@
-# ap_population_study
+# A. pullulans pangenome project
