@@ -2,21 +2,23 @@
 
 Project overview: This repository contains scripts used to build a pangenome graph of A. pullulans populations. The majority of the data is derived from BioProject: PRJNA488010. 
 
-Workflow
+## Workflow
+```
   1. Download data
   2. Quality control raw data
-     FastQC
-     MultiQC
-  4. Kmer analysis
-     Meryl count
-     GenomeScope
-  6. Assemble genomes
-  7. Quality control assembly
-     FastQC
-     MultiQC
-     Busco
-  9. Genome alignment and pangenome graph build
-     pggb
+    - FastQC
+    - MultiQC
+  3. Kmer analysis
+    - Meryl count
+    - GenomeScope
+  4. Assemble genomes
+  5. Quality control assembly
+    - FastQC
+    - MultiQC
+    - Busco
+  6. Genome alignment and pangenome graph build
+    - pggb
+```
 ```.
 Directory structure
 ├── data
