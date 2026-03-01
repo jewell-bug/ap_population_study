@@ -10,4 +10,16 @@ Workflow
   5. Quality control assembly
   6. Genome alignment and pangenome graph build
 
-<pre> ## Project Structure ```bash ap_population_study/ ├── data/ │ ├── raw/ │ └── processed/ ├── results/ │ ├── figures/ │ └── tables/ ├── scripts/ │ ├── preprocessing/ │ ├── analysis/ │ └── plotting/ └── README.md ``` </pre>
+```.
+Directory structure
+├── data
+├── README.md
+├── results
+└── scripts
+    ├── 01_getdata
+    │   └── 01_download_dataset_2.sh
+    ├── 02_QC_rawdata
+    ├── 03_kmer_analysis
+    ├── 04_genome_assembly
+    └── 05_pangenome_analysis
+```
