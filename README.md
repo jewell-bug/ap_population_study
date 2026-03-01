@@ -1,4 +1,4 @@
-# A. pullulans pangenome project
+# _A. pullulans_ pangenome project
 
 Project overview: This repository contains scripts used to build a pangenome graph of A. pullulans populations. The majority of the data is derived from BioProject: PRJNA488010. 
 
