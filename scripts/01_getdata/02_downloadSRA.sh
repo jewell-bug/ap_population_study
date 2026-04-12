@@ -1,9 +1,8 @@
--bash-4.2$ cat ~/ISG/proj_redo/scripts/01_rawdata/01_downloadSRA.sh
-#!/bin/sh
+#!/bin/bash
 #SBATCH --job-name=fasterq_dump_xanadu
 #SBATCH -n 1
 #SBATCH -N 1
-#SBATCH -c 7
+#SBATCH -c 16
 #SBATCH --mem=15G
 #SBATCH --partition=general
 #SBATCH --qos=general
@@ -17,7 +16,7 @@ hostname
 date
 
 #################################################################
-# Download fastq files from SRA
+# Download fastq files from SRA 
 #################################################################
 
 # load software
@@ -38,17 +37,15 @@ METADATA=../../metadata/SraRunTable.txt
 
 # Get a list of SRA accession numbers to download, put them in a file
 
-# there are 2 populations of treated Sclerotinia sclerotiorum and one untreated with three replicates per treatment for a total of 6 samples.
-    # the metadata table was downloaded from the SRA's "Run Selector" page.
+# there are 2 populations of treated Sclerotinia sclerotiorum and one untreated with three replicates per treatment for a total of 6 samples. 
+    # the metadata table was downloaded from the SRA's "Run Selector" page. 
 
 # extract rows matching our treatment groups names, pull out the SRA accession number (the first column)
 ACCLIST=../../metadata/accessionlist.txt
 sed '1d' $METADATA | cut -f 1 -d "," >$ACCLIST
 
-# use parallel to download 2 accessions at a time.
-#cat $ACCLIST | parallel --tmpdir /home/FCAM/jjung/ISG/git_ex9/rnaseq_tutorial/scripts/01_rawdata/tmp  -j 2 "fasterq-dump -O ${OUTDIR} {}"
+# use parallel to download 2 accessions at a time. 
+cat $ACCLIST | parallel --tmpdir /home/FCAM/jjung/ISG/git_ex9/rnaseq_tutorial/scripts/01_rawdata/tmp  -j 2 "fasterq-dump -O ${OUTDIR} {}"
 
-# compress the files
+# compress the files 
 ls ${OUTDIR}/*fastq | parallel -j 6 gzip
-
-##SRA run table was downloaded and filezilla was used to transfer run table and accession list
