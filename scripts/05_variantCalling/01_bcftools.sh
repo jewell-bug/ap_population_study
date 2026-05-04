@@ -1,5 +1,5 @@
 #!/bin/bash 
-#SBATCH --job-name=freebayes_bcf
+#SBATCH --job-name=bcf
 #SBATCH -n 1
 #SBATCH -N 1
 #SBATCH -c 7
@@ -17,7 +17,7 @@ hostname
 date
 
 # load required software
-module load freebayes/1.3.4
+#module load freebayes/1.3.4
 module load htslib/1.16
 module load bcftools
 module load samtools
