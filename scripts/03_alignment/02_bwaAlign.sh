@@ -15,7 +15,6 @@
 hostname
 date
 
-# load required software
 module load samtools/1.16.1
 module load samblaster/0.1.24
 module load bwa-mem2/2.1
@@ -30,9 +29,7 @@ INDEX=../../results/03_Alignment/bwa_index/APEXF
 
 
 
-
 # sample ID list
-# Hard-coded sample list
 SAMPLELIST=(
 SRR7958549
 SRR7958550
@@ -106,7 +103,6 @@ echo "  ${SAMPDIR}/${SAMPLE}_trim_1.fastq.gz \\"
 echo "  ${SAMPDIR}/${SAMPLE}_trim_2.fastq.gz"
 echo "======================================="
 
-# execute the alignment pipe:
 bwa-mem2 mem -t 7 -R ${RG} ${INDEX} ${SAMPDIR}/${SAMPLE}_trim_1.fastq.gz $SAMPDIR/${SAMPLE}_trim_2.fastq.gz | \
 	samblaster | \
 	samtools view -u - | \
