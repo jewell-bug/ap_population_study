@@ -1,4 +1,3 @@
--bash-4.2$ cat ~/ISG/proj_redo/scripts/01_rawdata/01_downloadSRA.sh
 #!/bin/sh
 #SBATCH --job-name=fasterq_dump_xanadu
 #SBATCH -n 1
@@ -16,9 +15,7 @@ export TMPDIR=/tmp
 hostname
 date
 
-#################################################################
-# Download fastq files from SRA
-#################################################################
+
 
 # load software
 
@@ -26,20 +23,16 @@ date
 module load parallel/20180122
 module load sratoolkit/3.0.1
 
-# data set from `Comparative transcriptome analysis of Sclerotinia sclerotiorum revealed its response mechanisms to the biological control agent, Bacillus amyloliquefaciens` Yang et al. 2020
-
-# The data are from this study:
-    # https://www.ncbi.nlm.nih.gov/bioproject/PRJNA526376
+# data set from "Fifty Aureobasidium pullulans genomes reveal a recombining polyextremotolerant generalist"
 
 
 OUTDIR=../../data/fastq
     mkdir -p ${OUTDIR}
 METADATA=../../metadata/SraRunTable.txt
-
+#https://www.ncbi.nlm.nih.gov/bioproject/PRJNA488010/
 # Get a list of SRA accession numbers to download, put them in a file
 
-# there are 2 populations of treated Sclerotinia sclerotiorum and one untreated with three replicates per treatment for a total of 6 samples.
-    # the metadata table was downloaded from the SRA's "Run Selector" page.
+
 
 # extract rows matching our treatment groups names, pull out the SRA accession number (the first column)
 ACCLIST=../../metadata/accessionlist.txt
