@@ -8,8 +8,10 @@ Project overview: This study uses a population of _A.pullulans_ isolates orginia
 ## Workflow
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e532bd8c-981a-4fe0-b124-982f68135762" width="80"/>
+  <img width="421" height="501" alt="ISG2 drawio" src="https://github.com/user-attachments/assets/620f7352-acd5-4a70-b01f-c62beb982078" width="80" />
 </p>
+
+
 
 
 
