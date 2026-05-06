@@ -15,9 +15,8 @@
 hostname
 date
 
-#################################################################
 # Trimmomatic
-#################################################################
+
 
 module load Trimmomatic/0.39
 module load parallel/20180122
@@ -28,7 +27,7 @@ TRIMDIR=../../results/02_qc/trimmed_fastq2
 mkdir -p $TRIMDIR
 
 
-#shared database
+
 # adapters to trim out
 ADAPTERS=/isg/shared/apps/Trimmomatic/0.39/adapters/TruSeq3-PE-2.fa
 
