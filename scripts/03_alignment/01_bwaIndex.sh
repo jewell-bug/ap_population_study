@@ -3,7 +3,7 @@
 #SBATCH -n 1
 #SBATCH -N 1
 #SBATCH -c 8
-#SBATCH --mem=80G
+#SBATCH --mem=10G
 #SBATCH --qos=general
 #SBATCH --partition=xeon
 #SBATCH --mail-user=
