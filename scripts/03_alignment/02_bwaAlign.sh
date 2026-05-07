@@ -95,13 +95,11 @@ echo "Processing sample: $SAMPLE"
 RG=$(echo \@RG\\tID:$SAMPLE\\tSM:$SAMPLE)
 echo "Read Group:"
 echo -e "${RG}"
-echo "======================================="
-# show command that will run
-echo "Running alignment command:"
+
 echo "bwa-mem2 mem -t 7 -R '${RG}' ${INDEX} \\"
 echo "  ${SAMPDIR}/${SAMPLE}_trim_1.fastq.gz \\"
 echo "  ${SAMPDIR}/${SAMPLE}_trim_2.fastq.gz"
-echo "======================================="
+
 
 bwa-mem2 mem -t 7 -R ${RG} ${INDEX} ${SAMPDIR}/${SAMPLE}_trim_1.fastq.gz $SAMPDIR/${SAMPLE}_trim_2.fastq.gz | \
 	samblaster | \
