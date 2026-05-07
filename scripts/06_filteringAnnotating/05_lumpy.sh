@@ -26,22 +26,30 @@ conda activate lumpy_env
 
 
 which samtools
-
 INDIR=../../results/03_Alignment/bwa_align6/
 OUTDIR=/scratch/jjung/final_proj/ap_population_study/results/06_Annotate/lumpy2
 
 mkdir -p $OUTDIR
 
-#for bam in $INDIR/*.bam; do
-#    sample=$(basename "$bam" .bam)
+for bam in $INDIR/*.bam; do
+    sample=$(basename "$bam" .bam)
 
-#	lumpyexpress -B "$bam" -o ${sample}.output.vcf
+# discordant reads
+    samtools view -b -F 1294 "$bam" > "$OUTDIR/${sample}.discordants.bam"
 
-#done
+     samtools view -h "$bam" | \
+        extractSplitReads_BwaMem -i stdin | \
+        samtools view -Sb - > "$OUTDIR/${sample}.splitters.bam"
 
+    # run lumpy
+    lumpyexpress \
+        -B "$bam" \
+        -S "$OUTDIR/${sample}.splitters.bam" \
+        -D "$OUTDIR/${sample}.discordants.bam" \
+        -o "$OUTDIR/${sample}.lumpy.vcf"
+ done
 
-#create variant summary file
-
+#sumary sv
 for vcf in $OUTDIR/*.vcf
 do
     sample=$(basename $vcf .vcf)
@@ -53,3 +61,6 @@ do
     echo -e "$sample\t$dels\t$dups\t$invs"
 done > ${OUTDIR}/sv_counts.txt
 
+#isolate deletions
+bcftools view -i 'INFO/SVTYPE="DEL"' ${OUTDIR}/SRR7958588.lumpy.vcf -Oz -o ${OUTDIR}/DEL.vcf.gz
+bcftools index ${OUTDIR}/DEL.vcf.gz
