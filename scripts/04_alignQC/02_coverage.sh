@@ -41,14 +41,13 @@ fi
 GFILE="$OUTDIR/genome.txt"
 cut -f1,2 "$FAI" > "$GFILE"
 # 10kb window
-
 WIN10KB="$OUTDIR/genome_10kb.bed"
 bedtools makewindows -g "$GFILE" -w 10000 > "$WIN10KB"
 
 # create BAM list
 #find "$INDIR" -name "*.bam" > "$OUTDIR/bam.list"
 
-# compute population coverage (using a 10kb window and mQual >30)
+#  population coverage (using 10kb windows and mQual >30)
 bamtools merge -list "$OUTDIR/bam.list" | \
 bamtools filter -in - -mapQuality ">30" -isDuplicate false -isProperPair true | \
 samtools depth -a - | \
