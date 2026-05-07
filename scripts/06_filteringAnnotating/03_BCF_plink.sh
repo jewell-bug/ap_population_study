@@ -13,21 +13,38 @@
 hostname
 date
 module load plink/2.00a2.3LM
-module load htslib/1.7
 module load bcftools/1.6
-module load GATK/4.1.3.0
 
 INDIR=../../results/05_variantCalling/bcftools
 OUTDIR=../../results/05_variantCalling/population_vcf
 
 mkdir -p ${OUTDIR}
 
-bcftools view -v snps -m2 -M2 ${INDIR}/bcftools_normAP.vcf.gz | \
-bcftools view -i 'MAF>0.01 && F_MISSING<0.1' | \
-bgzip > ${OUTDIR}/final.vcf.gz
+#bcftools view -v snps -m2 -M2 ${INDIR}/bcftools_normAP.vcf.gz | \
+#bcftools view -i 'MAF>0.01 && F_MISSING<0.1' | \
+#bgzip > ${OUTDIR}/final.vcf.gz
 
-tabix -p vcf ${OUTDIR}/final.vcf.gz
+#tabix -p vcf ${OUTDIR}/final.vcf.gz
+
+bcftools query \
+  -f '%CHROM\t%POS\t%REF\t%ALT\t%QUAL\t%INFO/DP\n' \
+  final.vcf.gz | gzip > final.clean.query.txt.gz
 
 
+plink2  --vcf ${OUTDIR}/final.vcf.gz \
+	--allow-extra-chr \
+	--indep-pairwise 50 5 0.2 \
+	--out ${OUTDIR}/pruned
 
-plink --vcf ${OUTDIR}/final.vcf.gz --make-bed --out dataset
+
+plink2 --vcf ${OUTDIR}/final.vcf.gz \
+      --allow-extra-chr \
+      --extract ${OUTDIR}/pruned.prune.in \
+      --make-bed \
+      --out ${OUTDIR}/dataset
+
+
+plink2 --bfile ${OUTDIR}/dataset \
+      --allow-extra-chr \
+      --pca 10 \
+      --out ${OUTDIR}/pca
