@@ -37,10 +37,12 @@ mkdir -p $OUTDIR
 
 #	lumpyexpress -B "$bam" -o ${sample}.output.vcf
 
-done
+#done
 
 
-for vcf in $INDIR/*.vcf
+#create variant summary file
+
+for vcf in $OUTDIR/*.vcf
 do
     sample=$(basename $vcf .vcf)
 
@@ -49,5 +51,5 @@ do
     invs=$(grep "SVTYPE=INV" $vcf | wc -l)
 
     echo -e "$sample\t$dels\t$dups\t$invs"
-done > sv_counts.txt
+done > ${OUTDIR}/sv_counts.txt
 
