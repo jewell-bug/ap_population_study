@@ -39,7 +39,7 @@ mkdir -p $OUTDIR
 bcftools mpileup \
 -f ../../genome/GCF_000721785.1_Aureobasidium_pullulans_var._pullulans_EXF-150_assembly_version_1.0_genomic.fna \
 ../../results/03_Alignment/bwa_align6/*.bam \
-| bcftools call -mv -Oz -o ${OUTDIR}/raw.vcf.gz
+| bcftools call -mv --ploidy 1 -Oz -o ${OUTDIR}/raw.vcf.gz
 
 tabix -p vcf ${OUTDIR}/raw.vcf.gz
 
