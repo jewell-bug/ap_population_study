@@ -31,6 +31,9 @@ bcftools query \
   final.vcf.gz | gzip > final.clean.query.txt.gz
 
 
+#run pruning for plink pca
+
+
 plink2  --vcf ${OUTDIR}/final.vcf.gz \
 	--allow-extra-chr \
 	--indep-pairwise 50 5 0.2 \
