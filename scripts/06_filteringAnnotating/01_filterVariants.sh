@@ -31,3 +31,15 @@ bcftools filter \
 bgzip >${BCFTOOLSOUT}
 
 tabix -p vcf ${BCFTOOLSOUT}
+
+
+###run vcftools to remove outlier samples and filter by allefrequency
+vcftools \
+--gzvcf ${BCFTOOLSOUT} \
+--remove-indv SRR7958553 \
+--remove-indv SRR7958581 \
+--maf 0.0001 \
+--recode \
+--recode-INFO-all \
+--out final.filtered
+
